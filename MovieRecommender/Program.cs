@@ -10,6 +10,10 @@ ITransformer model = BuildAndTrainModel(mlContext, trainingDataView);
 
 EvaluateModel(mlContext, testDataView, model);
 
+UseModelForSinglePrediction(mlContext, model);
+
+SaveModel(mlContext, trainingDataView.Schema, model);
+
 // Load data
 (IDataView training, IDataView test) LoadData(MLContext mlContext)
 {
@@ -57,3 +61,31 @@ void EvaluateModel(MLContext mlContext, IDataView testDataView, ITransformer mod
 
 
 }
+
+void UseModelForSinglePrediction(MLContext mlContext, ITransformer model)
+{
+    Console.WriteLine("=============== Making a prediction ===============");
+
+    var predictionEngine = mlContext.Model.CreatePredictionEngine<MovieRating, MovieRatingPrediction>(model);
+    var testInput = new MovieRating { userId = 6, movieId = 10 };
+    var movieRatingPrediction = predictionEngine.Predict(testInput);
+
+    if (Math.Round(movieRatingPrediction.Score, 1) > 3.5)
+    {
+        Console.WriteLine("Movie " + testInput.movieId + " is recommended for user " + testInput.userId);
+    }
+    else
+    {
+        Console.WriteLine("Movie " + testInput.movieId + " is not recommended for user " + testInput.userId);
+    }
+}
+
+void SaveModel(MLContext mlContext, DataViewSchema trainingDataViewSchema, ITransformer model)
+{
+    var modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "MovieRecommenderModel.zip");
+
+    Console.WriteLine("=============== Saving the model to a file ===============");
+
+    mlContext.Model.Save(model, trainingDataViewSchema, modelPath);
+}
+
