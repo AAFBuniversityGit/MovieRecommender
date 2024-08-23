@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <img src="assets/images/header.webp" alt="Movie Recommender">
+    </header>
+    <main>
+        <section>
+            <h1>Movie Recommender</h1>
+            <p>The Movie Recommender project uses ML.NET to build a recommendation system that predicts the rating a
+                user is likely to give to a particular movie. Based on this rating, the system recommends movies that
+                are likely to match the user's preferences.</p>
+        </section>
+        <section>
+            <h2>How It Works</h2>
+            <p>The model is built using a collaborative filtering approach known as Matrix Factorization. It works by
+                analyzing the interactions between users and movies to predict how a specific user might rate a movie
+                they haven't seen yet. The model is trained on a dataset containing user-movie ratings, and it learns
+                patterns that allow it to make accurate predictions for unseen data.</p>
+            <p>Once trained, the model can predict ratings for new user-movie pairs. If the predicted rating is above a
+                certain threshold, the movie is recommended to the user. The higher the predicted rating, the higher the
+                likelihood that the user will enjoy the movie.</p>
+        </section>
+        <section>
+            <h2>Code Explanation</h2>
+            <p>The code is structured to load the training and test datasets, build and train the model, evaluate its
+                performance, and use it for making predictions. The Matrix Factorization algorithm is particularly
+                well-suited for recommendation systems, as it can handle sparse data effectively.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Movie Recommender. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
